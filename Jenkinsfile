@@ -16,7 +16,13 @@ pipeline {
                 git branch:'main', url: 'https://github.com/somesh-v/task2.git' // Replace with your repo URL
             }
         }
-
+                stage('Build Docker Image') {
+            steps {
+                echo "Building Docker image..."
+                sh 'chmod +x build.sh'
+                sh './build.sh'
+            }
+        }
         
 
                 stage('Login to Docker Hub') {
@@ -40,7 +46,7 @@ pipeline {
             steps {
                 echo "Deploying Docker container..."
                 sh 'chmod +x deploy.sh'
-                sh './deploy.sh'
+                sh 'deploy.sh'
             }
         }
     }
